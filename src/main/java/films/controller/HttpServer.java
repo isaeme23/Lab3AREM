@@ -8,7 +8,7 @@ import java.io.*;
 /**
  * Clase que funciona como servidor HTTP
  * @author Isabella Manrique
- * @version 20/08/2023/A
+ * @version 22/08/2023/A
  */
 
 public class HttpServer {
@@ -48,6 +48,8 @@ public class HttpServer {
             boolean firstLine = true;
             String path = null;
 
+            String name = "";
+
             while ((inputLine = in.readLine()) != null) {
                 System.out.println("Received: " + inputLine);
                 if (firstLine) {
@@ -55,7 +57,7 @@ public class HttpServer {
                     path = inputLine.split(" ")[1];
                 }
                 if (inputLine.contains("GET") && inputLine.contains("=")){
-                    String name = inputLine.split("=")[1].split(" ")[0];
+                    name = inputLine.split("=")[1].split(" ")[0];
                     System.out.println("Nombre: "+name);
                 }
                 if (!in.ready()) {
@@ -66,8 +68,8 @@ public class HttpServer {
             outputLine = "HTTP/1.1 200 OK \r\n";
 
 
-            if (path.startsWith("/movie")){
-                outputLine += getHello("/movie");
+            if (path.startsWith("/"+name) && name != ""){
+                outputLine += getHello("/"+name);
             } else {
                 outputLine += getResponse();
             }
@@ -93,6 +95,10 @@ public class HttpServer {
                 + "\r\n" + "{\"msg\": \"Hello World!\"}";
         return response;
     } // Cierre del metodo
+
+    public static String sendName(String name){
+        return name;
+    }
 
     /**
      * Metodo usado para mostrar en formato http el contenido de la pagina acompañado de scripts para las
