@@ -21,8 +21,20 @@ import java.net.URL;
 public class OMDBAPIClient {
 
     // Variables de la clase
-    private static AREMflixService as = new AREMflixService();
+    private static AREMflixService as;
+    private static OMDBAPIClient instance = null;
     private static final String omdbapiurl = "http://www.omdbapi.com/?apikey=d6f2cc0d";
+
+    public OMDBAPIClient(AREMflixService as){
+        OMDBAPIClient.as = as;
+    }
+
+    public static OMDBAPIClient getInstance(){
+        if (instance == null){
+            instance = new OMDBAPIClient(AREMflixService.getInstance());
+        }
+        return instance;
+    }
 
     /**
      * Metodo que se encargara de traer la informacion de la pelicula consultada si esta almacenada en el cache,

@@ -13,12 +13,20 @@ public class AREMflixPersistence{
 
     // Variables de la clase
     private ConcurrentHashMap<String, String> moviesCache;
+    private static AREMflixPersistence instance = null;
 
     /**
      * Constructor de la clase AREMflixPersistence
      */
     public AREMflixPersistence(){
         moviesCache = new ConcurrentHashMap<String, String>();
+    }
+
+    public static AREMflixPersistence getInstance(){
+        if (instance == null){
+            instance = new AREMflixPersistence();
+        }
+        return instance;
     }
 
     /**

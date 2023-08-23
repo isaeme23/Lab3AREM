@@ -1,0 +1,4 @@
+films/persistence/AREMflixPersistence.class
+films/service/AREMflixService.class
+films/controller/HttpServer.class
+films/controller/OMDBAPIClient.class

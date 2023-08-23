@@ -12,13 +12,21 @@ import java.util.ArrayList;
 public class AREMflixService {
 
     // Variables de la clase
-    private AREMflixPersistence ap;
+    private static AREMflixPersistence ap;
+    private static AREMflixService instance = null;
 
     /**
      * Constructor de la clase AREMflixService
      */
-    public AREMflixService(){
-        this.ap = new AREMflixPersistence();
+    public AREMflixService(AREMflixPersistence ap){
+        AREMflixService.ap = ap;
+    }
+
+    public static AREMflixService getInstance(){
+        if (instance == null){
+            instance = new AREMflixService(AREMflixPersistence.getInstance());
+        }
+        return instance;
     }
 
     /**

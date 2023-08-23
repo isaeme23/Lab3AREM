@@ -94,7 +94,8 @@ public class HttpServer {
     } // Cierre del metodo
 
     public static String showInfo(String path) throws IOException {
-        String info = OMDBAPIClient.getMovie(path.split("=")[1]);
+        OMDBAPIClient client = OMDBAPIClient.getInstance();
+        String info = client.getMovie(path.split("=")[1]);
         JSONObject resp = new JSONObject(info);
         return "<div>"+
                 "<h1>" + resp.get("Title") + "</h1>"+
