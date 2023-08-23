@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Clase servicio de la API
  * @author Isabella Manrique
- * @version 20/08/2023/A
+ * @version 23/08/2023/A
  */
 public class AREMflixService {
 
@@ -15,13 +15,29 @@ public class AREMflixService {
     private AREMflixPersistence ap;
 
     /**
+     * Constructor de la clase AREMflixService
+     */
+    public AREMflixService(){
+        this.ap = new AREMflixPersistence();
+    }
+
+    /**
      * Metodo que se encarga de buscar una pelicula en la memoria cache (persistencia)
      * @param movie Nombre de la pelicula
      * @return Nombre de la pelicula e Informacion en un arreglo
      */
-    public ArrayList<String> getMovie(String movie){
+    public String getMovie(String movie){
         return ap.getMovie(movie);
     } // Cierre del metodo
+
+    /**
+     * Metodo que verifica si la pelicula a consultar se encuentra en el cache
+     * @param movie Nombre de la pelicula
+     * @return Booleano que indica si se encuentra en el cache
+     */
+    public boolean storedInCache(String movie){
+        return ap.movieStoredCache(movie);
+    }
 
     /**
      * Metodo que se encarga de enviar una pelicula a la memoria cache (persistencia)

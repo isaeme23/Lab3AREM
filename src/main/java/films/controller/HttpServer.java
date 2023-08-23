@@ -4,6 +4,7 @@ import films.service.AREMflixService;
 
 import java.net.*;
 import java.io.*;
+import org.json.*;
 
 /**
  * Clase que funciona como servidor HTTP
@@ -12,9 +13,6 @@ import java.io.*;
  */
 
 public class HttpServer {
-
-    // Variables de la clase
-    private AREMflixService as;
 
     /**
      * Metodo principal de la clase
@@ -58,7 +56,6 @@ public class HttpServer {
                 }
                 if (inputLine.contains("GET") && inputLine.contains("=")){
                     name = inputLine.split("=")[1].split(" ")[0];
-                    System.out.println("Nombre: "+name);
                 }
                 if (!in.ready()) {
                     break;
@@ -68,8 +65,8 @@ public class HttpServer {
             outputLine = "HTTP/1.1 200 OK \r\n";
 
 
-            if (path.startsWith("/"+name) && name != ""){
-                outputLine += getHello("/"+name);
+            if (path.startsWith("/movie")){
+                outputLine += getMovie(path);
             } else {
                 outputLine += getResponse();
             }
@@ -86,18 +83,28 @@ public class HttpServer {
 
     /**
      * Metodo usado para devolver un mensaje
-     * @param path Path de la pagina en donde se encuentra el mensaje
-     * @return Mensaje "Hello World"
+     * @param path
+     * @return Respuesta de la busqueda
      */
 
-    public static String getHello(String path){
-        String response = "Content-Type: text/html \r\n"
-                + "\r\n" + "{\"msg\": \"Hello World!\"}";
+    public static String getMovie(String path) throws IOException {
+        String response = "Content-Type: text/json \r\n"
+                + "\r\n" + showInfo(path);
         return response;
     } // Cierre del metodo
 
-    public static String sendName(String name){
-        return name;
+    public static String showInfo(String path) throws IOException {
+        String info = OMDBAPIClient.getMovie(path.split("=")[1]);
+        JSONObject resp = new JSONObject(info);
+        return "<div>"+
+                "<h1>" + resp.get("Title") + "</h1>"+
+                "<h2>" + resp.get("Year")+ "</h2>"+
+                "<img src=\"" + resp.get("Poster") +"\">"+
+                "<p>" + resp.get("Director") + "</p>"+
+                "<p>" + resp.get("Rated") + "</p>"+
+                "<p>" + resp.get("Genre") + "</p>"+
+                "<p>" + resp.get("Plot") + "</p>"+
+                "</div>\n";
     }
 
     /**
@@ -111,16 +118,17 @@ public class HttpServer {
                 + "\r\n <!DOCTYPE html>\n" +
                 "<html>\n" +
                 "    <head>\n" +
-                "        <title>Form Example</title>\n" +
+                "        <title>AREMFLIX</title>\n" +
                 "        <meta charset=\"UTF-8\">\n" +
                 "        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
                 "    </head>\n" +
                 "    <body>\n" +
-                "        <h1>Form with GET</h1>\n" +
+                "        <h1>AREMFLIX</h1>\n" +
+                "        <h2>Best source of movie information</h2>\n" +
                 "        <form action=\"/movie\">\n" +
                 "            <label for=\"name\">Name:</label><br>\n" +
-                "            <input type=\"text\" id=\"name\" name=\"name\" value=\"John\"><br><br>\n" +
-                "            <input type=\"button\" value=\"Submit\" onclick=\"loadGetMsg()\">\n" +
+                "            <input type=\"text\" id=\"name\" name=\"name\" value=\"Avengers\"><br><br>\n" +
+                "            <input type=\"button\" value=\"Search\" onclick=\"loadGetMsg()\">\n" +
                 "        </form> \n" +
                 "        <div id=\"getrespmsg\"></div>\n" +
                 "\n" +
@@ -137,24 +145,6 @@ public class HttpServer {
                 "            }\n" +
                 "        </script>\n" +
                 "\n" +
-                "        <h1>Form with POST</h1>\n" +
-                "        <form action=\"/moviepost\">\n" +
-                "            <label for=\"postname\">Name:</label><br>\n" +
-                "            <input type=\"text\" id=\"postname\" name=\"name\" value=\"John\"><br><br>\n" +
-                "            <input type=\"button\" value=\"Submit\" onclick=\"loadPostMsg(postname)\">\n" +
-                "        </form>\n" +
-                "        \n" +
-                "        <div id=\"postrespmsg\"></div>\n" +
-                "        \n" +
-                "        <script>\n" +
-                "            function loadPostMsg(name){\n" +
-                "                let url = \"/moviepost?name=\" + name.value;\n" +
-                "\n" +
-                "                fetch (url, {method: 'POST'})\n" +
-                "                    .then(x => x.text())\n" +
-                "                    .then(y => document.getElementById(\"postrespmsg\").innerHTML = y);\n" +
-                "            }\n" +
-                "        </script>\n" +
                 "    </body>\n" +
                 "</html>";
         return response;

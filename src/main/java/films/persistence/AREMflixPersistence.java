@@ -6,28 +6,38 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Esta clace almacena las consultas recientes de la API para usarse como cache de la aplicacion
  * @author Isabella Manrique
- * @version 20/08/2023/A
+ * @version 23/08/2023/A
  */
 
 public class AREMflixPersistence{
 
     // Variables de la clase
-    private ConcurrentHashMap<String, String> moviesCache = new ConcurrentHashMap<String, String>();
+    private ConcurrentHashMap<String, String> moviesCache;
+
+    /**
+     * Constructor de la clase AREMflixPersistence
+     */
+    public AREMflixPersistence(){
+        moviesCache = new ConcurrentHashMap<String, String>();
+    }
 
     /**
      * Este metodo recibe el nombre de una pelicula y si esta existe en el cache devuelve su informacion
      * @param movie Nombre de la pelicula
-     * @return Informacion y Nombre de la pelicula
+     * @return Informacion de la pelicula
      */
-    public ArrayList<String> getMovie(String movie){
-        ArrayList<String> couple = new ArrayList<String>();
-        if (moviesCache.contains(movie)){
-            String info = moviesCache.get(movie);
-            couple.add(movie);
-            couple.add(info);
-        }
-        return couple;
+    public boolean movieStoredCache(String movie){
+        return moviesCache.contains(movie);
     } // Cierre del metodo
+
+    /**
+     * Este metodo verifica si la pelicula se encuentra en el cache
+     * @param movie Nombre de la pelicula a consultar
+     * @return Booleano que indica si ya se ha consultado antes
+     */
+    public String getMovie(String movie){
+        return moviesCache.get(movie);
+    }
 
     /**
      * Este metodo agrega una pelicula y su informacion al cache
