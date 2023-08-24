@@ -20,14 +20,19 @@ public class AREMflixPersistence{
      */
     public AREMflixPersistence(){
         moviesCache = new ConcurrentHashMap<String, String>();
-    }
+    } // Cierre del metodo
 
+    /**
+     * Metodo que nos ayuda a implementar el patron Singleton para que no existan mas de una instancia de la clase
+     * AREMFlixPersistence
+     * @return Instancia de la clase
+     */
     public static AREMflixPersistence getInstance(){
         if (instance == null){
             instance = new AREMflixPersistence();
         }
         return instance;
-    }
+    } // Cierre del metodo
 
     /**
      * Este metodo recibe el nombre de una pelicula y si esta existe en el cache devuelve su informacion
@@ -45,7 +50,7 @@ public class AREMflixPersistence{
      */
     public String getMovie(String movie){
         return moviesCache.get(movie);
-    }
+    } // Cierre del metodo
 
     /**
      * Este metodo agrega una pelicula y su informacion al cache

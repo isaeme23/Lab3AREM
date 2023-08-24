@@ -22,6 +22,11 @@ public class AREMflixService {
         AREMflixService.ap = ap;
     }
 
+    /**
+     * Metodo que nos ayuda a implementar el patron Singleton para que no existan mas de una instancia de la clase
+     * AREMFlixService
+     * @return Instancia de la clase
+     */
     public static AREMflixService getInstance(){
         if (instance == null){
             instance = new AREMflixService(AREMflixPersistence.getInstance());

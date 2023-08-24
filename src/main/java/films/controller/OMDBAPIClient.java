@@ -25,9 +25,19 @@ public class OMDBAPIClient {
     private static OMDBAPIClient instance = null;
     private static final String omdbapiurl = "http://www.omdbapi.com/?apikey=d6f2cc0d";
 
+    /**
+     * Constructor de la clase OMDBAPIClient
+     * @param as instancia de AREMflixService
+     */
     public OMDBAPIClient(AREMflixService as){
         OMDBAPIClient.as = as;
     }
+
+    /**
+     * Metodo que nos ayuda a implementar el patron Singleton para que no existan mas de una instancia de la clase
+     * OMDBAPIClient
+     * @return Instancia de la clase
+     */
 
     public static OMDBAPIClient getInstance(){
         if (instance == null){
