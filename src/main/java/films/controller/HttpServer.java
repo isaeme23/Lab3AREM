@@ -1,5 +1,9 @@
 package films.controller;
 
+import films.inter.Mediatory;
+import films.inter.MovieResponse;
+import films.inter.impl.ImageMediatory;
+import films.inter.impl.TextMediatory;
 import films.service.AREMflixService;
 
 import java.net.*;
@@ -13,6 +17,8 @@ import org.json.*;
  */
 
 public class HttpServer {
+
+    private static Mediatory mediatory;
 
     /**
      * Metodo principal de la clase
@@ -28,6 +34,7 @@ public class HttpServer {
             System.err.println("Could not listen on port: 35000.");
             System.exit(1);
         }
+
         boolean running = true;
         while (running) {
             Socket clientSocket = null;
@@ -39,7 +46,6 @@ public class HttpServer {
                 System.exit(1);
             }
 
-            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             String inputLine, outputLine;
 
@@ -54,27 +60,26 @@ public class HttpServer {
                     firstLine = false;
                     path = inputLine.split(" ")[1];
                 }
-                if (inputLine.contains("GET") && inputLine.contains("=")){
-                    name = inputLine.split("=")[1].split(" ")[0];
-                }
                 if (!in.ready()) {
                     break;
                 }
             }
 
             outputLine = "HTTP/1.1 200 OK \r\n";
-
-
-            if (path.startsWith("/movie")){
-                outputLine += getMovie(path);
+            System.out.println("PATH: "+path);
+            if (path.contains("?")){
+                System.out.println("Path with Query:"+path);
+                MovieResponse.getMovie(clientSocket, path);
+            } else if (path.endsWith(".html") || path.endsWith(".css") || path.endsWith(".js")) {
+                mediatory = new TextMediatory(path, clientSocket);
+                mediatory.reply();
+            } else if (path.endsWith(".jpeg") || (path.endsWith(".jpg"))){
+                mediatory = new ImageMediatory(path, clientSocket);
+                mediatory.reply();
             } else {
-                outputLine += getResponse();
+                System.out.println("Otra extension xd");
             }
 
-
-            out.println(outputLine);
-
-            out.close();
             in.close();
             clientSocket.close();
         }

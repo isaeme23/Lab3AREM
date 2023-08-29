@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AREP Taller 2</title>
+    <link href="./style.css" rel="stylesheet"/>
+</head>
+<body>
+    <h1>Ejemplo de contenido</h1>
+    <h2>Contenido de la pagina</h2>
+    <img src="./img1.jpeg" />
+    <h1>AREMFLIX</h1>
+           <h2>Best source of movie information</h2>
+            <form action="/movie">
+                    <label for="name">Name:</label><br>
+                    <input type="text" id="name" name="name" value="Avengers"><br><br>
+                    <input type="button" value="Search" onclick="getFetch()">
+                </form>
+            <div id="getrespmsg" class="response-container"></div>
+    <script src="./app.js"></script>
+</body>
+</html>

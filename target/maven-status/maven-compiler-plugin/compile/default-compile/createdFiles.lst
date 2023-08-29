@@ -1,4 +1,8 @@
+films/inter/MovieResponse.class
 films/persistence/AREMflixPersistence.class
-films/service/AREMflixService.class
+films/inter/impl/TextMediatory.class
 films/controller/HttpServer.class
+films/inter/Mediatory.class
+films/service/AREMflixService.class
+films/inter/impl/ImageMediatory.class
 films/controller/OMDBAPIClient.class
