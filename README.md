@@ -17,7 +17,7 @@ Antes de poder descargar este proyecto, necesitas tener lo siguiente:
 ### ¿Como puedo usar este proyecto?
 Primero, debes descargar el contenido de este repositorio usando el siguiente comando en tu terminal local
 ``` 
-git clone https://github.com/isaeme23/AREMflix.git
+git clone https://github.com/isaeme23/Lab2AREM.git
 ```
 Despues para compilar el contenido, usaremos la siguiente linea para compilar
 ``` 
