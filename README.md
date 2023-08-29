@@ -1,4 +1,5 @@
 # AREMFlix
+### Segunda versión (Lab2 AREP)
 ![](https://img.shields.io/badge/tested%20with-junit-green) ![](https://img.shields.io/badge/using-maven-lightblue
 ) ![](https://img.shields.io/badge/status-extensible-lightgreen
 )
