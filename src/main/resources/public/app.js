@@ -13,18 +13,6 @@ let getFetch = () => {
                                                   "<p>" + response.Genre + "</p>"+
                                                   "<p>" + response.Plot + "</p>"+
                                                   "</div>\n";
-            /*
-                    createHTMLElement("h2", response.Title, container);
-                    createHTMLElement("h3", response.Year, container);
-                    createHTMLElement("p", `Director: ${response.Director}`, container);
-
-                    createHTMLElement("p", `Genre: ${response.Genre}`, container);
-                    createHTMLElement("p", `Rating: ${response.Rated}`, container);
-
-                    createImage(response.Poster, container);
-
-                    createHTMLElement("p", `Plot: ${response.Plot}`, container);
-                    */
                     document.getElementById("getrespmsg").appendChild(container);
                     document.getElementById("getrespmsg").classList.remove("display-none");
         })
