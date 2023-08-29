@@ -27,14 +27,27 @@ Y por ultimo, para ver su funcionamiento usaremos
 mvn exec:java
 ``` 
 La funcionalidad del codigo la podremos ver a traves del puerto 35000. En nuestro navegador pordremos verlo escribiendo
-**localhost:35000**. Nos encontraremos con la siguiente informacion:
+**localhost:35000/index.html** para acceder al buscador de peliculas. Nos encontraremos con la siguiente informacion:
 
 ![](/img/img1.png)
+
+Para lo anterior se usaron archivos de tipo .html, .js y .css
 
 En el espacio en donde se nos permite escribir un nombre de una pelicula, podremos colocar cualquier ejemplo para poder
 ver que informacion tenemos disponible sobre la pelicula:
 
 ![](/img/img2.png)
+
+Tambien podemos probar mostrar diferentes archivos de tipo imagen. Como prueba podremos escribir en el buscardor las
+las siguientes dos rutas:
+
+``` 
+localhost:35000/img1.jpeg
+```
+
+``` 
+localhost:35000/img2.jpg
+```
 
 ## Documentación
 Para generar la documentacion de este proyecto solo debes ejecutar la siguiente linea en la terminal
@@ -75,8 +88,6 @@ Isabella Manrique :basecampy: :computer:
 
 ## Agradecimientos
 - Profesor Luis Daniel Benavides Navarro
-
-~~Ojala no vuelva a temblar en clase~~
 
 ## Referencias
 

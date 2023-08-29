@@ -2,26 +2,26 @@
 <testng-results ignored="0" total="4" passed="4" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-08-29T17:03:04 COT" name="Surefire suite" finished-at="2023-08-29T17:03:05 COT" duration-ms="232">
+  <suite started-at="2023-08-29T17:13:50 COT" name="Surefire suite" finished-at="2023-08-29T17:13:51 COT" duration-ms="375">
     <groups>
     </groups>
-    <test started-at="2023-08-29T17:03:04 COT" name="Surefire test" finished-at="2023-08-29T17:03:05 COT" duration-ms="232">
+    <test started-at="2023-08-29T17:13:50 COT" name="Surefire test" finished-at="2023-08-29T17:13:51 COT" duration-ms="375">
       <class name="films.AREMflixServiceTest">
-        <test-method signature="storedinCache_Should_ReturnFalse_When_MovieNotInCache()" started-at="2023-08-29T17:03:05 COT" name="storedinCache_Should_ReturnFalse_When_MovieNotInCache" finished-at="2023-08-29T17:03:05 COT" duration-ms="2" status="PASS">
+        <test-method signature="storedinCache_Should_ReturnFalse_When_MovieNotInCache()" started-at="2023-08-29T17:13:51 COT" name="storedinCache_Should_ReturnFalse_When_MovieNotInCache" finished-at="2023-08-29T17:13:51 COT" duration-ms="4" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- storedinCache_Should_ReturnFalse_When_MovieNotInCache -->
-        <test-method signature="getMovie_Should_ShowMovieInformation_When_MovieInCache()" started-at="2023-08-29T17:03:05 COT" name="getMovie_Should_ShowMovieInformation_When_MovieInCache" finished-at="2023-08-29T17:03:05 COT" duration-ms="3" status="PASS">
+        <test-method signature="getMovie_Should_ShowMovieInformation_When_MovieInCache()" started-at="2023-08-29T17:13:51 COT" name="getMovie_Should_ShowMovieInformation_When_MovieInCache" finished-at="2023-08-29T17:13:51 COT" duration-ms="8" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- getMovie_Should_ShowMovieInformation_When_MovieInCache -->
       </class> <!-- films.AREMflixServiceTest -->
       <class name="films.ServerTest">
-        <test-method signature="typeFileImageMediatory_ShouldReturnExtensionOfFile()" started-at="2023-08-29T17:03:04 COT" name="typeFileImageMediatory_ShouldReturnExtensionOfFile" finished-at="2023-08-29T17:03:05 COT" duration-ms="40" status="PASS">
+        <test-method signature="typeFileImageMediatory_ShouldReturnExtensionOfFile()" started-at="2023-08-29T17:13:51 COT" name="typeFileImageMediatory_ShouldReturnExtensionOfFile" finished-at="2023-08-29T17:13:51 COT" duration-ms="115" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- typeFileImageMediatory_ShouldReturnExtensionOfFile -->
-        <test-method signature="typeFileImageMediatory_ShouldReturnEmmptyIfnotExtension()" started-at="2023-08-29T17:03:04 COT" name="typeFileImageMediatory_ShouldReturnEmmptyIfnotExtension" finished-at="2023-08-29T17:03:05 COT" duration-ms="78" status="PASS">
+        <test-method signature="typeFileImageMediatory_ShouldReturnEmmptyIfnotExtension()" started-at="2023-08-29T17:13:51 COT" name="typeFileImageMediatory_ShouldReturnEmmptyIfnotExtension" finished-at="2023-08-29T17:13:51 COT" duration-ms="175" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- typeFileImageMediatory_ShouldReturnEmmptyIfnotExtension -->
