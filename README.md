@@ -93,3 +93,4 @@ Isabella Manrique :basecampy: :computer:
 ## Referencias
 
 1. [Andy's Tech Tutorials]. (2023, March 6). OMDB (Open Movie Database) API Tutorial [Video]. YouTube. https://www.youtube.com/watch?v=UZtruL7svkc
+2. Rooney. (2019, febrero 5). How to fetch and display JSON data in HTML using JavaScript. How to Create Apps. https://howtocreateapps.com/fetch-and-display-json-html-javascript/
