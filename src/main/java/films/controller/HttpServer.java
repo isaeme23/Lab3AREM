@@ -73,7 +73,7 @@ public class HttpServer {
             } else if (path.endsWith(".html") || path.endsWith(".css") || path.endsWith(".js")) {
                 mediatory = new TextMediatory(path, clientSocket);
                 mediatory.reply();
-            } else if (path.endsWith(".jpeg") || (path.endsWith(".jpg"))){
+            } else if (path.endsWith(".jpeg") || (path.endsWith(".jpg")) || path.endsWith(".gif")){
                 mediatory = new ImageMediatory(path, clientSocket);
                 mediatory.reply();
             } else {

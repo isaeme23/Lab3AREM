@@ -1,21 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AREP Taller 2</title>
+    <title>AREMFlix 2.0</title>
     <link href="./style.css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Ejemplo de contenido</h1>
-    <h2>Contenido de la pagina</h2>
-    <img src="./img1.jpeg" />
-    <h1>AREMFLIX</h1>
-           <h2>Best source of movie information</h2>
-            <form action="/movie">
-                    <label for="name">Name:</label><br>
-                    <input type="text" id="name" name="name" value="Avengers"><br><br>
-                    <input type="button" value="Search" onclick="getFetch()">
-                </form>
-            <div id="getrespmsg" class="response-container"></div>
+    <header>
+        <div class="main_heading">
+            <h1><span id="first_line">AREMFlix</span></h1>
+        </div>
+    </header>
+    <div class="top">
+        <div class="bob">
+            <img src="./bobgif.gif" />
+        </div>
+        <div class="wbox">
+            <p>Esta herramienta es un buscador de informaci&oacute;n de peliculas. Para usarlo solo ingresa el titulo
+                y podr&aacute;s conocer todos los datos sobre tus peliculas favoritas.</p>
+        </div>
+    </div>
+    <div class="aremflix">
+        <form action="/movie">
+            <label for="name">Nombre:</label><br>
+            <input type="text" id="name" name="name" value="Avengers"><br><br>
+            <input type="button" value="Search" onclick="getFetch()">
+        </form>
+    </div>
+    <div id="getrespmsg" class="response-container"></div>
     <script src="./app.js"></script>
 </body>
 </html>

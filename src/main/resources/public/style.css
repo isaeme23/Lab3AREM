@@ -1,10 +1,93 @@
-h1 {
-  color: red;
-  font-family: sans-serif, Helvetica, Verdana;
+header {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #AB5FA7;
+  color: white;
+}
+
+header h1{
+    position: relative;
+    margin: 1px 25px 2px;
 }
 
 body {
-  display: grid;
-  height: 100vh;
-  background: #333;
+  font-family: 'Roboto', sans-serif;
+  color: black;
+  font-weight: bold;
+}
+
+.bob img{
+    width: 400px;
+    height: auto;
+    float: left;
+    margin: 1px 30px 45px;
+}
+
+.top{
+    width:100%;
+}
+
+.main-heading{
+  max-width: 800px;
+  text-align: center;
+  margin: auto;
+}
+
+.main-heading h1{
+  font-size: 50px;
+}
+
+.top{
+    position: absolute;
+    left: 10%;
+    top: 10%;
+}
+
+div1 {
+-moz-border-radius: 15px; //for mozilla support
+-webkit-border-radius: 15px; //for chrome support
+border-radius: 15px;
+}
+
+.wbox {
+  position: relative;
+  width: 45%;
+  box-sizing: border-box;
+  color: rgb(17, 17, 17);
+  max-width: 500px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(179, 112, 176, 0.5) 0px 16px 24px 15px;
+  padding-bottom: 50px;
+  margin: 35px 45px 30px;
+  border-radius: 12.5px;
+  float: left;
+}
+
+.wbox h1{
+    margin: 25px 20px 5px;
+    position: relative;
+    color: #87255b
+}
+.wbox p{
+    margin: 25px 20px 5px;
+    position: relative;
+    font-size: 25px;
+    color: #473e43;
+}
+
+.aremflix{
+    margin: 400px 100px 45px;
+    position: absolute;
+    left: 30%;
+    right: 50%;
+}
+
+.respuesta{
+    margin: 500px 100px 45px;
+    right: 20%
+    float left;
+}
+
+.poster{
+    float: left;
 }
