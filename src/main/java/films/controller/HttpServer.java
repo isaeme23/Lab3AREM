@@ -8,6 +8,9 @@ import films.service.AREMflixService;
 
 import java.net.*;
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.json.*;
 
 /**
@@ -17,6 +20,8 @@ import org.json.*;
  */
 
 public class HttpServer {
+
+    static Map<String, StringService> servicios = new HashMap<>();
 
     private static Mediatory mediatory;
 
@@ -66,10 +71,18 @@ public class HttpServer {
             }
 
             outputLine = "HTTP/1.1 200 OK \r\n";
-            System.out.println("PATH: "+path);
+
             if (path.contains("?")){
-                System.out.println("Path with Query:"+path);
-                MovieResponse.getMovie(clientSocket, path);
+                String finalPath = path;
+                Socket finalClientSocket = clientSocket;
+                get("/movie", new StringService() {
+                            @Override
+                            public void response() throws IOException {
+                                MovieResponse.getMovie(finalClientSocket, finalPath);
+                    }
+                });
+                System.out.println("SPARK: "+path);
+                buscar(path).response();
             } else if (path.endsWith(".html") || path.endsWith(".css") || path.endsWith(".js")) {
                 mediatory = new TextMediatory(path, clientSocket);
                 mediatory.reply();
@@ -86,73 +99,12 @@ public class HttpServer {
         serverSocket.close();
     } // Cierre del metodo
 
-    /**
-     * Metodo usado para devolver un mensaje
-     * @param path
-     * @return Respuesta de la busqueda
-     */
-
-    public static String getMovie(String path) throws IOException {
-        String response = "Content-Type: text/json \r\n"
-                + "\r\n" + showInfo(path);
-        return response;
-    } // Cierre del metodo
-
-    public static String showInfo(String path) throws IOException {
-        OMDBAPIClient client = OMDBAPIClient.getInstance();
-        String info = client.getMovie(path.split("=")[1]);
-        JSONObject resp = new JSONObject(info);
-        return "<div>"+
-                "<h1>" + resp.get("Title") + "</h1>"+
-                "<h2>" + resp.get("Year")+ "</h2>"+
-                "<img src=\"" + resp.get("Poster") +"\">"+
-                "<p>" + resp.get("Director") + "</p>"+
-                "<p>" + resp.get("Rated") + "</p>"+
-                "<p>" + resp.get("Genre") + "</p>"+
-                "<p>" + resp.get("Plot") + "</p>"+
-                "</div>\n";
+    public static void get(String parm, StringService stringService){
+        servicios.put(parm, stringService);
     }
 
-    /**
-     * Metodo usado para mostrar en formato http el contenido de la pagina acompañado de scripts para las
-     * diferentes funcionalidades del mismo
-     * @return Respuesta GET/POST
-     */
+    public static StringService buscar(String nombre){
+        return servicios.get(nombre);
+    }
 
-    public static String getResponse(){
-        String response = "Content-Type: text/html \r\n"
-                + "\r\n <!DOCTYPE html>\n" +
-                "<html>\n" +
-                "    <head>\n" +
-                "        <title>AREMFLIX</title>\n" +
-                "        <meta charset=\"UTF-8\">\n" +
-                "        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
-                "    </head>\n" +
-                "    <body>\n" +
-                "        <h1>AREMFLIX</h1>\n" +
-                "        <h2>Best source of movie information</h2>\n" +
-                "        <form action=\"/movie\">\n" +
-                "            <label for=\"name\">Name:</label><br>\n" +
-                "            <input type=\"text\" id=\"name\" name=\"name\" value=\"Avengers\"><br><br>\n" +
-                "            <input type=\"button\" value=\"Search\" onclick=\"loadGetMsg()\">\n" +
-                "        </form> \n" +
-                "        <div id=\"getrespmsg\"></div>\n" +
-                "\n" +
-                "        <script>\n" +
-                "            function loadGetMsg() {\n" +
-                "                let nameVar = document.getElementById(\"name\").value;\n" +
-                "                const xhttp = new XMLHttpRequest();\n" +
-                "                xhttp.onload = function() {\n" +
-                "                    document.getElementById(\"getrespmsg\").innerHTML =\n" +
-                "                    this.responseText;\n" +
-                "                }\n" +
-                "                xhttp.open(\"GET\", \"/movie?name=\"+nameVar);\n" +
-                "                xhttp.send();\n" +
-                "            }\n" +
-                "        </script>\n" +
-                "\n" +
-                "    </body>\n" +
-                "</html>";
-        return response;
-    } // Cierre del metodo
 } // Cierre de la clase
