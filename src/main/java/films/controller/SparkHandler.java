@@ -5,18 +5,13 @@ import java.util.Map;
 
 public class SparkHandler {
 
-    static Map<String, StringService> servicios = new HashMap<>();
+    private static final Map<String, StringService> servicios = new HashMap<>();
 
-    public static void main(String[] args) {
-        System.out.println("spark");
-    }
-
-
-    public static void get(String parm, StringService stringService){
-        servicios.put(parm, stringService);
-    }
-
-    public static StringService buscar(String nombre){
+    public static StringService buscar(String nombre) {
         return servicios.get(nombre);
+    }
+
+    public static void get(String str, StringService service){
+        servicios.put(str, service);
     }
 }

@@ -4,7 +4,6 @@ import films.inter.Mediatory;
 import films.inter.MovieResponse;
 import films.inter.impl.ImageMediatory;
 import films.inter.impl.TextMediatory;
-import films.service.AREMflixService;
 
 import java.net.*;
 import java.io.*;
@@ -12,6 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.json.*;
+
+import static films.controller.SparkHandler.buscar;
 
 /**
  * Clase que funciona como servidor HTTP
@@ -72,18 +73,23 @@ public class HttpServer {
 
             outputLine = "HTTP/1.1 200 OK \r\n";
 
-            if (path.contains("?")){
+
+            if(path.contains("?")) {
                 String finalPath = path;
                 Socket finalClientSocket = clientSocket;
-                get("/movie", new StringService() {
-                            @Override
-                            public void response() throws IOException {
-                                MovieResponse.getMovie(finalClientSocket, finalPath);
-                    }
+                SparkHandler.get(path, str -> {
+                    MovieResponse.getMovie(finalClientSocket, finalPath);
                 });
-                System.out.println("SPARK: "+path);
-                buscar(path).response();
-            } else if (path.endsWith(".html") || path.endsWith(".css") || path.endsWith(".js")) {
+                buscar(path).response("str");
+                System.out.println("SPARK: " + path);
+            } else if (!path.contains(".")){
+                String finalPath = path;
+                Socket finalClientSocket = clientSocket;
+                SparkHandler.get(path, str ->{
+                    MovieResponse.getMovie(finalClientSocket, "/movie?="+finalPath);
+                });
+                buscar(path).response("str");
+            }else if (path.endsWith(".html") || path.endsWith(".css") || path.endsWith(".js")) {
                 mediatory = new TextMediatory(path, clientSocket);
                 mediatory.reply();
             } else if (path.endsWith(".jpeg") || (path.endsWith(".jpg")) || path.endsWith(".gif")){
@@ -99,12 +105,5 @@ public class HttpServer {
         serverSocket.close();
     } // Cierre del metodo
 
-    public static void get(String parm, StringService stringService){
-        servicios.put(parm, stringService);
-    }
-
-    public static StringService buscar(String nombre){
-        return servicios.get(nombre);
-    }
 
 } // Cierre de la clase
