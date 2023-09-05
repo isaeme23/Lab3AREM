@@ -12,10 +12,9 @@ public class MovieResponse {
         OMDBAPIClient omdbapi = OMDBAPIClient.getInstance();
         System.out.println("PASA POR GET MOVIE");
         PrintWriter out = new PrintWriter(client.getOutputStream(), true);
-        String movie = path.split("=")[1];
         String outputLine = "HTTP/1.1 200 OK \r\n" +
                 "Content-Type: application/json \r\n" +
-                "\r\n"+ omdbapi.getMovie(movie);
+                "\r\n"+ omdbapi.getMovie(path);
         out.println(outputLine);
         out.close();
         client.close();

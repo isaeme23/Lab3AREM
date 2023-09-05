@@ -30,7 +30,7 @@
           </execution>
         </executions>
         <configuration>
-          <mainClass>films.controller.HttpServer</mainClass>
+          <mainClass>films.controller.LambdaInit</mainClass>
         </configuration>
       </plugin>
     </plugins>

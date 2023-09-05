@@ -17,7 +17,7 @@ import static films.controller.SparkHandler.buscar;
 /**
  * Clase que funciona como servidor HTTP
  * @author Isabella Manrique
- * @version 22/08/2023/A
+ * @version 5/09/2023/A
  */
 
 public class HttpServer {
@@ -28,11 +28,10 @@ public class HttpServer {
 
     /**
      * Metodo principal de la clase
-     * @param args Arreglo de argumentos
      * @throws IOException Excepcion de entrada/salida
      */
 
-    public static void main(String[] args) throws IOException {
+    public static void start() throws IOException {
         ServerSocket serverSocket = null;
         try {
             serverSocket = new ServerSocket(35000);
@@ -53,12 +52,11 @@ public class HttpServer {
             }
 
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            String inputLine, outputLine;
+            String inputLine;
 
             boolean firstLine = true;
             String path = null;
 
-            String name = "";
 
             while ((inputLine = in.readLine()) != null) {
                 System.out.println("Received: " + inputLine);
@@ -71,24 +69,9 @@ public class HttpServer {
                 }
             }
 
-            outputLine = "HTTP/1.1 200 OK \r\n";
-
 
             if(path.contains("?")) {
-                String finalPath = path;
-                Socket finalClientSocket = clientSocket;
-                SparkHandler.get(path, str -> {
-                    MovieResponse.getMovie(finalClientSocket, finalPath);
-                });
-                buscar(path).response("str");
-                System.out.println("SPARK: " + path);
-            } else if (!path.contains(".")){
-                String finalPath = path;
-                Socket finalClientSocket = clientSocket;
-                SparkHandler.get(path, str ->{
-                    MovieResponse.getMovie(finalClientSocket, "/movie?="+finalPath);
-                });
-                buscar(path).response("str");
+                buscar("/movie").response(path.split("=")[1], clientSocket);
             }else if (path.endsWith(".html") || path.endsWith(".css") || path.endsWith(".js")) {
                 mediatory = new TextMediatory(path, clientSocket);
                 mediatory.reply();
@@ -98,7 +81,6 @@ public class HttpServer {
             } else {
                 System.out.println("Otra extension xd");
             }
-
             in.close();
             clientSocket.close();
         }
