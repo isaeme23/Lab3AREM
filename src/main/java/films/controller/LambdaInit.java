@@ -22,6 +22,10 @@ public class LambdaInit {
             MovieResponse.getMovie(cli, str);
         });
 
+        post("/movie", (str, cli) ->{
+            MovieResponse.getMovie(cli, str);
+        });
+
         start();
     } // Cierre del metodo
 } // Cierre de la clase

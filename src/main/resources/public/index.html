@@ -30,6 +30,14 @@
         </form>
     </div>
     <div id="getrespmsg" class="response-container"></div>
+    <div class="aremflix1">
+        <form action="/movie">
+            <label for="name">(POST)Nombre:</label><br>
+            <input type="text" id="name1" name="name1" value="Avengers"><br><br>
+            <input type="button" value="Search" onclick="postFetch()">
+        </form>
+    </div>
+    <div id="postrespmsg" class="response-container"></div>
     <script src="./app.js"></script>
 </body>
 </html>

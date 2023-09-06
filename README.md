@@ -1,5 +1,5 @@
 # AREMFlix
-### Segunda versión (Lab2 AREP)
+### Tercera versión (Lab3 AREP)
 ![](https://img.shields.io/badge/tested%20with-junit-green) ![](https://img.shields.io/badge/using-maven-lightblue
 ) ![](https://img.shields.io/badge/status-extensible-lightgreen
 )
@@ -49,6 +49,12 @@ localhost:35000/img1.jpeg
 ``` 
 localhost:35000/img2.jpg
 ```
+
+En esta actualizacion se implemento un SparkHandler, el cual haciendo uso de funciones lambda y una interfaz funcional,
+es capaz de hacer que funcionen nuevos metodos escritos en esta clase. Cualquier metodo que se quiera implemetar,
+se puede escribir en la clase LambdaInit que es ahora la clase principal del programa y tambien inicializa el HttpServer.
+
+![](/img/img3.png)
 
 ## Documentación
 Para generar la documentacion de este proyecto solo debes ejecutar la siguiente linea en la terminal
